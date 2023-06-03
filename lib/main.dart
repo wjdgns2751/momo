@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:momo_messagner/common/theme/momo_dark.dart';
+import 'package:momo_messagner/common/theme/momo_light.dart';
+import 'package:momo_messagner/feature/welcome/pages/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -6,19 +9,16 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-//#FDA687 복숭아
-//
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'MoMo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const Scaffold(
-          body: Center(child: Text('MoMo First Page')),
-        ));
+      title: 'MoMo',
+      debugShowCheckedModeBanner: false,
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
+      themeMode: ThemeMode.system,
+      home: const WelcomePage(),
+    );
   }
 }
