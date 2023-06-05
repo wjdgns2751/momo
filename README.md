@@ -1,3 +1,5 @@
- # Momo Application
- <img align = "left" src="https://github.com/wjdgns2751/momo/assets/53415689/1c7491e1-5691-4378-920f-b5276847e970.PNG"  width="30" height="30"> **APP ICON**
- 
+ # 모모
+ * 아이콘 및 로딩 이미지 설정 (2022-06-02)
+ * 흑백 테마 별 색상 설정 (2022-06-03)
+ * 로딩 후 화면 UI 생성 (2022-06-03)
+ * 본인 인증 화면 UI 생성 (2022-06-05)
