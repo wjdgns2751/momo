@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:momo_messagner/common/theme/momo_dark.dart';
 import 'package:momo_messagner/common/theme/momo_light.dart';
+import 'package:momo_messagner/feature/auth/pages/momo_login_page.dart';
 import 'package:momo_messagner/feature/welcome/pages/welcome_page.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
-      home: const WelcomePage(),
+      home: const MomoLoginPage(),
     );
   }
 }

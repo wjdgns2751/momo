@@ -9,6 +9,9 @@ class MomoColors {
   static const Color subBlueLight = Color(0xFF017f78);
   static const Color subGreyDark = Color(0xFF8696A0);
   static const Color subGreyLight = Color(0xFF707d85);
+
   static const Color backDark = Color(0xFF111B21);
   static const Color backLight = Color(0xFFFFFFFF);
+
+  static const Color backGrey = Color(0xFF202C33);
 }
