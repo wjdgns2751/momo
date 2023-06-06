@@ -24,10 +24,11 @@ ThemeData lightTheme() {
       MomoThemeExtension.lightMode,
     ],
     appBarTheme: const AppBarTheme(
+        titleTextStyle: TextStyle(fontSize: 18),
         systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    )),
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        )),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       backgroundColor: MomoColors.mainBlueLight,
@@ -43,5 +44,9 @@ ThemeData lightTheme() {
             borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
         ))),
+    dialogBackgroundColor: MomoColors.backLight,
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    ),
   );
 }

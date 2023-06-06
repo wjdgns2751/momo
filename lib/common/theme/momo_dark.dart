@@ -24,10 +24,11 @@ ThemeData darkTheme() {
       MomoThemeExtension.darkMode,
     ],
     appBarTheme: const AppBarTheme(
+        titleTextStyle: TextStyle(fontSize: 18),
         systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-    )),
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+        )),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       backgroundColor: MomoColors.mainBlueDark,
@@ -37,11 +38,16 @@ ThemeData darkTheme() {
       shadowColor: Colors.transparent,
     )),
     bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: MomoColors.backGrey,
-        modalBackgroundColor: MomoColors.backGrey,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20),
-        ))),
+      backgroundColor: MomoColors.backGrey,
+      modalBackgroundColor: MomoColors.backGrey,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        top: Radius.circular(20),
+      )),
+    ),
+    dialogBackgroundColor: MomoColors.backGrey,
+    dialogTheme: DialogTheme(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+    ),
   );
 }

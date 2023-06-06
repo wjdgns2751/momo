@@ -1,7 +1,12 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:async/async.dart';
+import 'package:momo_messagner/common/helper/momo_alert_dialog.dart';
 import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
 import 'package:momo_messagner/common/utils/momo_colors.dart';
-import 'package:momo_messagner/common/utils/widgets/momo_custom_button.dart';
+import 'package:momo_messagner/common/utils/widgets/momo_elevated_button.dart';
+import 'package:momo_messagner/common/utils/widgets/momo_icon_button.dart';
+import 'package:momo_messagner/feature/auth/widgets/momo_masked_formatter.dart';
 import 'package:momo_messagner/feature/auth/widgets/momo_text_field.dart';
 
 class MomoLoginPage extends StatefulWidget {
@@ -15,6 +20,8 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
   late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
   late TextEditingController phoneNumberController;
+  bool isButtonEnabled = false;
+  CancelableOperation<void>? debouncedSetState;
 
   @override
   void initState() {
@@ -32,6 +39,63 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
     super.dispose();
   }
 
+  showCountryCodePicker() {
+    showCountryPicker(
+        context: context,
+        showPhoneCode: true,
+        // favorite: ['KR'],
+        searchAutofocus: true,
+        countryFilter: [
+          'KR',
+        ],
+        countryListTheme: CountryListThemeData(
+          bottomSheetHeight: 400,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          flagSize: 22,
+          borderRadius: BorderRadius.circular(20),
+          textStyle: TextStyle(color: context.theme.greyColor),
+          inputDecoration: InputDecoration(
+            labelStyle: TextStyle(color: context.theme.greyColor),
+            prefixIcon: const Icon(
+              Icons.language_outlined,
+              color: MomoColors.mainBlueDark,
+            ),
+            hintText: '국가를 선택해주세요.',
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: context.theme.greyColor!.withOpacity(0.2),
+              ),
+            ),
+            focusedBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: MomoColors.mainBlueDark,
+              ),
+            ),
+          ),
+        ),
+        onSelect: (value) {
+          countryNameController.text = value.name;
+          countryCodeController.text = value.phoneCode;
+        });
+  }
+
+  sendInfoToPhone() {
+    print('is here');
+    final phone = phoneNumberController.text;
+    final name = countryNameController.text;
+
+    if (phone.isEmpty) {
+      return showAlertDialog(context: context, message: '핸드폰 번호를 입력해주세요.');
+    } else if (phone.length < 9) {
+      return showAlertDialog(
+          context: context, message: '$name 코드를 제외한 핸드폰 번호 $phone 가 짧습니다. ');
+    } else if (phone.length > 11) {
+      return showAlertDialog(
+          context: context,
+          message: '$name  코드를 제외한 핸드폰 번호 $phone 가 유효하지 않습니다. ');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,17 +107,12 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
           style: TextStyle(color: context.theme.authAppbarTextColor),
         ),
         centerTitle: true,
+        // actions: [MomoIconButton()],
         actions: [
-          IconButton(
-              onPressed: () {},
-              splashColor: Colors.transparent,
-              splashRadius: 22,
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(minWidth: 40),
-              icon: Icon(
-                Icons.more_vert_outlined,
-                color: context.theme.greyColor,
-              ))
+          MomoIconButton(
+            onPreesed: () {},
+            icon: Icons.more_vert,
+          )
         ],
       ),
       body: Column(children: [
@@ -76,27 +135,12 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: MomoTextField(
-            onTap: () {},
-            textEditingController: countryNameController,
-            readOnly: true,
-            suffixIcon: const Icon(
-              Icons.arrow_drop_down,
-              color: MomoColors.mainBlueDark,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Row(
             children: [
               SizedBox(
-                width: 70,
+                width: 40,
                 child: MomoTextField(
-                  onTap: () {},
+                  // onTap: showCountryCodePicker,
                   textEditingController: countryCodeController,
                   prefixText: '+',
                   readOnly: true,
@@ -104,23 +148,64 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
               ),
               const SizedBox(width: 10),
               Expanded(
-                  child: MomoTextField(
-                textEditingController: phoneNumberController,
-                hintText: 'ex) 1012345678',
-                textAlign: TextAlign.left,
-                keyBoardType: TextInputType.number,
-              ))
+                child: MomoTextField(
+                  inputFormatters: [
+                    MomoMaskedTextInputFormatter(masks: [
+                      'xxx-xxxx-xxxx',
+                      'xxx-xxx-xxxx',
+                      'xxx-xxxx-xxx'
+                    ], separator: '-')
+                  ],
+                  textEditingController: phoneNumberController,
+                  hintText: '',
+                  keyBoardType: TextInputType.number,
+                  onChanged: (value) {
+                    debouncedSetState?.cancel();
+                    debouncedSetState = CancelableOperation.fromFuture(
+                      Future.delayed(const Duration(milliseconds: 300), () {
+                        // Perform the actual setState operation
+                        setState(() {
+                          isButtonEnabled =
+                              RegExp(r'^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$')
+                                  .hasMatch(value);
+                        });
+                      }),
+                    );
+                  },
+                ),
+              ),
+              isButtonEnabled ? const SizedBox(width: 30) : const SizedBox(),
+              isButtonEnabled
+                  ? MomoElevatedButton(
+                      onPressed: isButtonEnabled ? sendInfoToPhone : () {},
+                      text: '인증',
+                      buttonWidth: 50,
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: MomoTextField(
+            maxLength: 6,
+            letterSpacing: 6,
+            hintText: '_ _ _  _ _ _',
+            fontSize: 22,
+            autoFocus: true,
+            keyBoardType: TextInputType.number,
+            onChanged: (value) {},
+          ),
+        ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         Text('통신사 요금이 부과될 수 있습니다.',
             style: TextStyle(color: context.theme.greyColor))
       ]),
-      floatingActionButton: MomoCustomButton(
-        onPressed: () {},
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: MomoElevatedButton(
+        onPressed: sendInfoToPhone,
         text: '계속하기',
         buttonWidth: 90,
       ),
