@@ -2,13 +2,13 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:async/async.dart';
-import 'package:momo_messagner/common/helper/momo_alert_dialog.dart';
-import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
-import 'package:momo_messagner/common/utils/momo_colors.dart';
-import 'package:momo_messagner/common/utils/widgets/momo_elevated_button.dart';
-import 'package:momo_messagner/common/utils/widgets/momo_icon_button.dart';
-import 'package:momo_messagner/feature/auth/widgets/momo_masked_formatter.dart';
-import 'package:momo_messagner/feature/auth/widgets/momo_text_field.dart';
+import 'package:momo/common/helper/momo_alert_dialog.dart';
+import 'package:momo/common/theme/extension/momo_theme_extension.dart';
+import 'package:momo/common/utils/momo_colors.dart';
+import 'package:momo/common/utils/widgets/momo_elevated_button.dart';
+import 'package:momo/common/utils/widgets/momo_icon_button.dart';
+import 'package:momo/feature/auth/widgets/momo_masked_formatter.dart';
+import 'package:momo/feature/auth/widgets/momo_text_field.dart';
 
 class MomoLoginPage extends StatefulWidget {
   const MomoLoginPage({super.key});

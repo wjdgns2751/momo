@@ -1,4 +1,4 @@
-name: momo_messagner
+name: momo
 description: momo project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
@@ -13,7 +13,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.3.1
   country_picker: ^2.0.20
-
+  firebase_core: ^2.13.1
+  firebase_auth: ^4.6.2
+  cloud_firestore: ^4.8.0
+  firebase_storage: ^11.2.2
+  flutter_riverpod: ^2.3.6
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

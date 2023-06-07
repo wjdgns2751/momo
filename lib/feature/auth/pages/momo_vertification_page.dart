@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
-import 'package:momo_messagner/common/utils/widgets/momo_icon_button.dart';
-import 'package:momo_messagner/feature/auth/widgets/momo_text_field.dart';
+import 'package:momo/common/theme/extension/momo_theme_extension.dart';
+import 'package:momo/common/utils/widgets/momo_icon_button.dart';
+import 'package:momo/feature/auth/widgets/momo_text_field.dart';
 
-class MomoVertificationPage extends StatefulWidget {
-  const MomoVertificationPage({super.key});
+class MomoVerificationPage extends StatefulWidget {
+  const MomoVerificationPage(
+      {super.key, required this.id, required this.phoneNumber});
+
+  final String id;
+  final String phoneNumber;
 
   @override
-  State<MomoVertificationPage> createState() => _MomoVertificationPageState();
+  State<MomoVerificationPage> createState() => _MomoVerificationPageState();
 }
 
-class _MomoVertificationPageState extends State<MomoVertificationPage> {
+class _MomoVerificationPageState extends State<MomoVerificationPage> {
   late TextEditingController codeController;
 
   @override

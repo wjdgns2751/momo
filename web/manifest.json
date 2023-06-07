@@ -1,6 +1,6 @@
 {
-    "name": "momo_messagner",
-    "short_name": "momo_messagner",
+    "name": "momo",
+    "short_name": "momo",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

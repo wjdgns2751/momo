@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
+import 'package:momo/common/theme/extension/momo_theme_extension.dart';
 
 showAlertDialog({
   required BuildContext context,

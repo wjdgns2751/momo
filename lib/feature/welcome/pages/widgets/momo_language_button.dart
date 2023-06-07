@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
-import 'package:momo_messagner/common/utils/momo_colors.dart';
+import 'package:momo/common/theme/extension/momo_theme_extension.dart';
+import 'package:momo/common/utils/momo_colors.dart';
 
 class MomoLanguageButton extends StatelessWidget {
   const MomoLanguageButton({

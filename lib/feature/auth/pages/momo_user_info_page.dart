@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
-import 'package:momo_messagner/common/utils/widgets/momo_elevated_button.dart';
-import 'package:momo_messagner/feature/auth/widgets/momo_text_field.dart';
+import 'package:momo/common/theme/extension/momo_theme_extension.dart';
+import 'package:momo/common/utils/widgets/momo_elevated_button.dart';
+import 'package:momo/feature/auth/widgets/momo_text_field.dart';
 
 class MomoUserInfoPage extends StatefulWidget {
   const MomoUserInfoPage({super.key});

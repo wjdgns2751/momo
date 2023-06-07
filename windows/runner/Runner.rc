@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "momo_messagner" "\0"
+            VALUE "FileDescription", "momo" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "momo_messagner" "\0"
+            VALUE "InternalName", "momo" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "momo_messagner.exe" "\0"
-            VALUE "ProductName", "momo_messagner" "\0"
+            VALUE "OriginalFilename", "momo.exe" "\0"
+            VALUE "ProductName", "momo" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
