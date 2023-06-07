@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:async/async.dart';
 import 'package:momo_messagner/common/helper/momo_alert_dialog.dart';
 import 'package:momo_messagner/common/theme/extension/momo_theme_extension.dart';
@@ -80,7 +81,6 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
   }
 
   sendInfoToPhone() {
-    print('is here');
     final phone = phoneNumberController.text;
     final name = countryNameController.text;
 
@@ -206,8 +206,8 @@ class _MomoLoginPageState extends State<MomoLoginPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: MomoElevatedButton(
         onPressed: sendInfoToPhone,
-        text: '계속하기',
-        buttonWidth: 90,
+        text: '다음으로',
+        buttonWidth: 88,
       ),
     );
   }

@@ -24,15 +24,20 @@ class MomoThemeExtension extends ThemeExtension<MomoThemeExtension> {
     langBtnBgColor: const Color(0xFFF7F8FA),
     langBtnHighlightColor: const Color(0xFFE8E8ED),
     authAppbarTextColor: MomoColors.mainBlueLight,
+    photoIconBgColor: const Color(0xFFF0F2F4),
+    photoIconColor: const Color(0xFF9DABB2),
   );
 
   static MomoThemeExtension darkMode = MomoThemeExtension(
-      momoImageColor: MomoColors.mainBlueDark,
-      blueColor: MomoColors.mainBlueDark,
-      greyColor: MomoColors.subGreyDark,
-      langBtnBgColor: const Color(0xFF182229),
-      langBtnHighlightColor: const Color(0xFF09141A),
-      authAppbarTextColor: const Color(0xFFE9EDEF));
+    momoImageColor: MomoColors.mainBlueDark,
+    blueColor: MomoColors.mainBlueDark,
+    greyColor: MomoColors.subGreyDark,
+    langBtnBgColor: const Color(0xFF182229),
+    langBtnHighlightColor: const Color(0xFF09141A),
+    authAppbarTextColor: const Color(0xFFE9EDEF),
+    photoIconBgColor: const Color(0xFF283342),
+    photoIconColor: const Color(0xFF61716B),
+  );
 
   final Color? momoImageColor;
   final Color? greyColor;
@@ -40,14 +45,19 @@ class MomoThemeExtension extends ThemeExtension<MomoThemeExtension> {
   final Color? langBtnBgColor;
   final Color? langBtnHighlightColor;
   final Color? authAppbarTextColor;
+  final Color? photoIconBgColor;
+  final Color? photoIconColor;
 
-  MomoThemeExtension(
-      {this.momoImageColor,
-      this.greyColor,
-      this.blueColor,
-      this.langBtnBgColor,
-      this.langBtnHighlightColor,
-      this.authAppbarTextColor});
+  MomoThemeExtension({
+    this.momoImageColor,
+    this.greyColor,
+    this.blueColor,
+    this.langBtnBgColor,
+    this.langBtnHighlightColor,
+    this.authAppbarTextColor,
+    this.photoIconBgColor,
+    this.photoIconColor,
+  });
 
   @override
   ThemeExtension<MomoThemeExtension> copyWith({
@@ -57,6 +67,8 @@ class MomoThemeExtension extends ThemeExtension<MomoThemeExtension> {
     Color? langBtnBgColor,
     Color? langBtnHighlightColor,
     Color? authAppbarTextColor,
+    Color? photoIconBgColor,
+    Color? photoIconColor,
   }) {
     return MomoThemeExtension(
       momoImageColor: momoImageColor ?? this.momoImageColor,
@@ -66,6 +78,8 @@ class MomoThemeExtension extends ThemeExtension<MomoThemeExtension> {
       langBtnHighlightColor:
           langBtnHighlightColor ?? this.langBtnHighlightColor,
       authAppbarTextColor: authAppbarTextColor ?? this.authAppbarTextColor,
+      photoIconBgColor: photoIconBgColor ?? this.photoIconBgColor,
+      photoIconColor: photoIconColor ?? this.photoIconColor,
     );
   }
 
@@ -82,6 +96,8 @@ class MomoThemeExtension extends ThemeExtension<MomoThemeExtension> {
           Color.lerp(langBtnHighlightColor, other.langBtnHighlightColor, t),
       authAppbarTextColor:
           Color.lerp(authAppbarTextColor, other.authAppbarTextColor, t),
+      photoIconBgColor: Color.lerp(photoIconBgColor, other.photoIconBgColor, t),
+      photoIconColor: Color.lerp(photoIconColor, other.photoIconColor, t),
     );
   }
 }
