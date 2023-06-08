@@ -1,36 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo/common/theme/extension/momo_theme_extension.dart';
 import 'package:momo/common/utils/widgets/momo_icon_button.dart';
+import 'package:momo/feature/auth/controller/momo_auth_controller.dart';
 import 'package:momo/feature/auth/widgets/momo_text_field.dart';
 
-class MomoVerificationPage extends StatefulWidget {
+class MomoVerificationPage extends ConsumerWidget {
   const MomoVerificationPage(
-      {super.key, required this.id, required this.phoneNumber});
+      {super.key, required this.smsCodeId, required this.phoneNumber});
 
-  final String id;
+  final String smsCodeId;
   final String phoneNumber;
 
-  @override
-  State<MomoVerificationPage> createState() => _MomoVerificationPageState();
-}
-
-class _MomoVerificationPageState extends State<MomoVerificationPage> {
-  late TextEditingController codeController;
-
-  @override
-  void initState() {
-    codeController = TextEditingController();
-    super.initState();
+  void verifySmsCode(BuildContext context, WidgetRef ref, String smsCode) {
+    ref.read(momoAuthControllerProvider).verifySmsCode(
+        context: context,
+        smsCodeId: smsCodeId,
+        smsCode: smsCode,
+        mounted: true);
   }
 
   @override
-  void dispose() {
-    codeController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -67,11 +58,17 @@ class _MomoVerificationPageState extends State<MomoVerificationPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: MomoTextField(
-                hintText: '- - -  - - -',
+                hintText: '_ _ _  _ _ _',
+                maxLength: 6,
+                letterSpacing: 6,
                 fontSize: 30,
                 autoFocus: true,
                 keyBoardType: TextInputType.number,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  if (value.length == 6) {
+                    return verifySmsCode(context, ref, value);
+                  }
+                },
               ),
             ),
             const SizedBox(

@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo/common/routes/routes.dart';
 import 'package:momo/common/theme/momo_dark.dart';
 import 'package:momo/common/theme/momo_light.dart';
-import 'package:momo/feature/auth/pages/momo_user_info_page.dart';
 import 'package:momo/feature/welcome/pages/welcome_page.dart';
 import 'package:momo/firebase_options.dart';
 
@@ -12,7 +12,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

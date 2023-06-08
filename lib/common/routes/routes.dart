@@ -26,7 +26,7 @@ class Routes {
         final Map args = settings.arguments as Map;
         return MaterialPageRoute(
             builder: (context) => MomoVerificationPage(
-                  id: args['id'],
+                  smsCodeId: args['verificationId'],
                   phoneNumber: args['phoneNumber'],
                 ));
 
