@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo/common/helper/momo_alert_dialog.dart';
+import 'package:momo/common/models/momo_user_model.dart';
+import 'package:momo/common/repository/firebase_storage_repository.dart';
 import 'package:momo/common/routes/routes.dart';
 
 final momoAuthRepositoryProvider = Provider((ref) {
@@ -73,6 +75,43 @@ class MomoAuthRepository {
       );
     } on FirebaseAuth catch (exception) {
       showAlertDialog(context: context, message: exception.toString());
+    }
+  }
+
+  //
+  void saveUserInfoToFireStore(
+      {required String userName,
+      required var profileImage,
+      required ProviderRef ref,
+      required BuildContext context,
+      required bool mounted}) async {
+    try {
+      String uid = auth.currentUser!.uid;
+      String profileImageUrl = '';
+      if (profileImage != null) {
+        profileImageUrl = await ref
+            .read(firebaseStorageRepositoryProvider)
+            .storeFileToFirebase('profileImage/$uid', profileImage);
+      }
+      MomoUserModel userModel = MomoUserModel(
+          userName: userName,
+          uid: uid,
+          profileImageUrl: profileImageUrl,
+          active: true,
+          phoneNumber: auth.currentUser!.phoneNumber!,
+          groupId: []);
+
+      await fireStore.collection('users').doc(uid).set(userModel.toMap());
+
+      if (!mounted) return;
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        Routes.homePage,
+        (route) => false,
+      );
+    } catch (e) {
+      showAlertDialog(context: context, message: e.toString());
     }
   }
 }

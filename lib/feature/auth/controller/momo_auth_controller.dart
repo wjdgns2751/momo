@@ -5,14 +5,28 @@ import 'package:momo/feature/auth/repository/momo_auth_repository.dart';
 final momoAuthControllerProvider = Provider(
   (ref) {
     final momoAuthRepository = ref.watch(momoAuthRepositoryProvider);
-    return MomoAuthController(momoAuthRepository: momoAuthRepository);
+    return MomoAuthController(momoAuthRepository: momoAuthRepository, ref: ref);
   },
 );
 
 class MomoAuthController {
   final MomoAuthRepository momoAuthRepository;
+  final ProviderRef ref;
 
-  MomoAuthController({required this.momoAuthRepository});
+  MomoAuthController({required this.ref, required this.momoAuthRepository});
+
+  void saveUserInfoToFireStore(
+      {required String userName,
+      required var profileImage,
+      required BuildContext context,
+      required bool mounted}) {
+    momoAuthRepository.saveUserInfoToFireStore(
+        userName: userName,
+        profileImage: profileImage,
+        ref: ref,
+        context: context,
+        mounted: mounted);
+  }
 
   void verifySmsCode({
     required BuildContext context,
