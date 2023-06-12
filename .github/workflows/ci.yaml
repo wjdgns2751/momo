@@ -1,0 +1,44 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+    # main 브랜치에서 푸시 이벤트를 수신
+      - main
+
+jobs:
+  build:
+    # 빌드를 위한 macos 환경을 설정
+    runs-on: macos-latest
+
+    steps:
+      # 코드 확인
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # subosito/flutter-action 작업을 사용하여 Flutter 설정
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+
+      # flutter pub get을 사용하여 프로젝트 종속성을 설치
+      - name: Install dependencies
+        run: flutter pub get
+
+      # flutter Android test 
+      - name: Run Android tests
+        run: flutter test test_driver/app_test.dart
+
+      - name: Set up Xcode
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-select: latest
+
+      # flutter IOS test 
+      - name: Run iOS tests
+        run: |
+          cd ios
+          pod install
+          cd ..
+          flutter drive --target=test_driver/app.dart --flavor=development
