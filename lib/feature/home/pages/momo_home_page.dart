@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momo/common/utils/widgets/momo_icon_button.dart';
-import 'package:momo/feature/home/pages/momo_call_page.dart';
-import 'package:momo/feature/home/pages/momo_chat_page.dart';
-import 'package:momo/feature/home/pages/momo_status_page.dart';
+import 'package:momo/feature/home/pages/momo_call_home_page.dart';
+import 'package:momo/feature/home/pages/momo_chat_home_page.dart';
+import 'package:momo/feature/home/pages/momo_status_home_page.dart';
 
 class MomoHomePage extends ConsumerStatefulWidget {
   const MomoHomePage({super.key});
@@ -65,11 +65,9 @@ class _MomoHomePageState extends ConsumerState<MomoHomePage> {
         ),
         body: const TabBarView(
           children: [
-            MomoChatPage(),
-            MomoStatusPage(),
-            MomoCallPage(),
-            // StatusHomePage(),
-            // CallHomePage(),
+            MomoChatHomePage(),
+            MomoStatusHomePage(),
+            MomoCallHomePage(),
           ],
         ),
       ),

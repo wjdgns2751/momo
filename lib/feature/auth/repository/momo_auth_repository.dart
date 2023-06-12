@@ -19,6 +19,7 @@ class MomoAuthRepository {
 
   MomoAuthRepository({required this.auth, required this.fireStore});
 
+  // 현재 사용자 정보 가져오기
   Future<MomoUserModel?> getCurrentUserInfo() async {
     MomoUserModel? momoUser;
     final momoUserInfo =
@@ -29,34 +30,41 @@ class MomoAuthRepository {
     return momoUser;
   }
 
-  void saveUserInfoToFireStore(
-      {required String userName,
-      required var profileImage,
-      required ProviderRef ref,
-      required BuildContext context,
-      required bool mounted}) async {
+  // 사용자 정보 Firestore에 저장하기
+  void saveUserInfoToFireStore({
+    required String userName,
+    required var profileImage,
+    required ProviderRef ref,
+    required BuildContext context,
+    required bool mounted,
+  }) async {
     try {
       momoLoadingDialog(context: context, message: '사용자정보를 저장중입니다.');
 
       String uid = auth.currentUser!.uid;
       String profileImageUrl = profileImage is String ? profileImage : '';
       if (profileImage != null && profileImage is! String) {
+        // 프로필 이미지를 Firebase 스토리지에 저장하고 URL을 얻어옴
         profileImageUrl = await ref
             .read(firebaseStorageRepositoryProvider)
             .storeFileToFirebase('profileImage/$uid', profileImage);
       }
       MomoUserModel userModel = MomoUserModel(
-          userName: userName,
-          uid: uid,
-          profileImageUrl: profileImageUrl,
-          active: true,
-          phoneNumber: auth.currentUser!.phoneNumber!,
-          groupId: []);
+        userName: userName,
+        uid: uid,
+        profileImageUrl: profileImageUrl,
+        lastSeen: DateTime.now().millisecondsSinceEpoch,
+        active: true,
+        phoneNumber: auth.currentUser!.phoneNumber!,
+        groupId: [],
+      );
 
+      // Firestore의 'users' 컬렉션에 사용자 정보 저장
       await fireStore.collection('users').doc(uid).set(userModel.toMap());
 
       if (!mounted) return;
 
+      // 홈 페이지로 이동하면서 이전의 모든 라우트 삭제
       Navigator.pushNamedAndRemoveUntil(
         context,
         Routes.homePage,
@@ -68,7 +76,7 @@ class MomoAuthRepository {
     }
   }
 
-  //SMS 코드 검증
+  // SMS 코드 검증
   void verifySmsCode({
     required BuildContext context,
     required String smsCodeId,
@@ -79,42 +87,49 @@ class MomoAuthRepository {
       momoLoadingDialog(context: context, message: '인증번호 코드를 확인중입니다.');
 
       final credential = PhoneAuthProvider.credential(
-          verificationId: smsCodeId, smsCode: smsCode);
+        verificationId: smsCodeId,
+        smsCode: smsCode,
+      );
       await auth.signInWithCredential(credential);
 
-      //사용자
+      // 사용자 정보 가져오기
       MomoUserModel? momoUser = await getCurrentUserInfo();
 
       if (!mounted) return;
+      // 사용자 정보 페이지로 이동하면서 프로필 이미지 URL 전달
       Navigator.pushNamedAndRemoveUntil(
-          context, Routes.uesrInfoPage, (route) => false,
-          arguments: momoUser?.profileImageUrl);
+        context,
+        Routes.uesrInfoPage,
+        (route) => false,
+        arguments: momoUser?.profileImageUrl,
+      );
     } on FirebaseAuthException catch (exception) {
       Navigator.pop(context);
       showAlertDialog(context: context, message: exception.toString());
     }
   }
 
-  //SMS 코드를 전송하는 기능
+  // SMS 코드 전송
   void sendSmsCode({
     required BuildContext context,
     required String phoneNumber,
   }) async {
     try {
       momoLoadingDialog(context: context, message: '인증번호 코드를 발송중입니다.');
-      //인증 관련 작업을 수행
+
+      // 인증 관련 작업 수행
       await auth.verifyPhoneNumber(
-        //when : 인증이 완료
+        // 인증이 완료된 경우
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) async {
-          //로그인
+          // 로그인
           await auth.signInWithCredential(credential);
         },
-        //when : 인증이 실패
+        // 인증이 실패한 경우
         verificationFailed: (reason) {
           showAlertDialog(context: context, message: reason.toString());
         },
-        //when : SMS 코드가 전송되었을 때
+        // SMS 코드가 전송된 경우
         codeSent: (smsCodeId, resendSmsCodeId) {
           Navigator.pushNamedAndRemoveUntil(
             context,
@@ -126,7 +141,7 @@ class MomoAuthRepository {
             },
           );
         },
-        //when : 제한 시간 초과
+        // 제한 시간이 초과된 경우
         codeAutoRetrievalTimeout: (String smsCodeId) {},
       );
     } on FirebaseAuth catch (exception) {
@@ -134,6 +149,4 @@ class MomoAuthRepository {
       showAlertDialog(context: context, message: exception.toString());
     }
   }
-
-  //
 }

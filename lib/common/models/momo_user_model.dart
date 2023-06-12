@@ -5,14 +5,17 @@ class MomoUserModel {
   final bool active;
   final String phoneNumber;
   final List<String> groupId;
+  final int lastSeen;
 
-  MomoUserModel(
-      {required this.userName,
-      required this.uid,
-      required this.profileImageUrl,
-      required this.active,
-      required this.phoneNumber,
-      required this.groupId});
+  MomoUserModel({
+    required this.userName,
+    required this.uid,
+    required this.profileImageUrl,
+    required this.active,
+    required this.phoneNumber,
+    required this.groupId,
+    required this.lastSeen,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,6 +25,7 @@ class MomoUserModel {
       'active': active,
       'phoneNumber': phoneNumber,
       'groupId': groupId,
+      'lastSeen': lastSeen,
     };
   }
 
@@ -33,6 +37,7 @@ class MomoUserModel {
       active: map['active'] ?? false,
       phoneNumber: map['phoneNumber'] ?? '',
       groupId: List<String>.from(map['groupId']),
+      lastSeen: map['lastSeen'] ?? 0,
     );
   }
 }

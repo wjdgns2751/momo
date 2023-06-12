@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:momo/common/theme/extension/momo_theme_extension.dart';
 
 class MomoIconButton extends StatelessWidget {
   const MomoIconButton({
@@ -36,7 +35,7 @@ class MomoIconButton extends StatelessWidget {
           iconSize: iconSize ?? 22,
           icon: Icon(
             icon,
-            color: iconColor ?? context.theme.greyColor,
+            color: iconColor ?? Theme.of(context).appBarTheme.iconTheme?.color,
           )),
     );
   }

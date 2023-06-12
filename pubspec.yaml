@@ -12,14 +12,27 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.3.1
+  
   country_picker: ^2.0.20
+
+  #Firebase start
   firebase_core: ^2.13.1
   firebase_auth: ^4.6.2
   cloud_firestore: ^4.8.0
   firebase_storage: ^11.2.2
+  #Firebase end
+
+  #상태관리
   flutter_riverpod: ^2.3.6
+  
+  #이미지
   image_picker: ^0.8.7+5
   photo_manager: ^2.6.0
+  cached_network_image: ^3.2.3
+  
+  flutter_contacts: ^1.1.6
+  url_launcher: ^6.1.11
+  intl: ^0.18.1
   
 dev_dependencies:
   flutter_test:

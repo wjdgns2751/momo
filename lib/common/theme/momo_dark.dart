@@ -24,15 +24,17 @@ ThemeData darkTheme() {
       MomoThemeExtension.darkMode,
     ],
     appBarTheme: const AppBarTheme(
-        backgroundColor: MomoColors.backGrey,
-        titleTextStyle: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            color: MomoColors.subGreyDark),
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.light,
-        )),
+      backgroundColor: MomoColors.backGrey,
+      titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: MomoColors.subGreyDark),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      iconTheme: IconThemeData(color: MomoColors.subGreyDark),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       backgroundColor: MomoColors.mainBlueDark,

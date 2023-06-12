@@ -24,12 +24,14 @@ ThemeData lightTheme() {
       MomoThemeExtension.lightMode,
     ],
     appBarTheme: const AppBarTheme(
-        backgroundColor: MomoColors.mainBlueLight,
-        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-        )),
+      backgroundColor: MomoColors.mainBlueLight,
+      titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+      iconTheme: IconThemeData(color: Colors.white),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       backgroundColor: MomoColors.mainBlueLight,

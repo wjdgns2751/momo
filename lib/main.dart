@@ -11,10 +11,15 @@ import 'package:momo/feature/welcome/pages/welcome_page.dart';
 import 'package:momo/firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // Flutter 애플리케이션 초기화
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash 유지
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // Firebase 초기화
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // 앱 실행
   runApp(const ProviderScope(child: MyApp()));
 }
 
