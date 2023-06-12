@@ -21,8 +21,11 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const MomoLoginPage());
 
       case uesrInfoPage:
+        final String? profileImageUrl = settings.arguments as String?;
         return MaterialPageRoute(
-            builder: (context) => const MomoUserInfoPage());
+            builder: (context) => MomoUserInfoPage(
+                  profileImageUrl: profileImageUrl,
+                ));
 
       case verificationPage:
         final Map args = settings.arguments as Map;

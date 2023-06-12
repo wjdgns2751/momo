@@ -9,3 +9,5 @@
  * Firebase 가상 핸드폰 정보를 등록 후 Riverpod 라이브러리를 사용하여 구현 (2023-06-08)
  * Image_Picker 와 Photo_manger를 활용하여 갤러리 및 카메라 촬영 이미지 가져오도록 구현 (2023-06-09)
  * Firebase Storage 와 FireStore Database 생성 후 이미지와 개인정보가 저장되는 로직 구현 (2023-06-10)
+ * Firebase Storage 와 FireStore Database 에서 저장된 데이터를 가져오는 로직 구현 (2023-06-12)
+ 

@@ -40,8 +40,11 @@ class _MomoUserInfoPageState extends ConsumerState<MomoUserInfoPage> {
 
     ref.read(momoAuthControllerProvider).saveUserInfoToFireStore(
           userName: userName,
-          profileImage:
-              imageCamera ?? imageGallery ?? widget.profileImageUrl ?? '',
+          profileImage: imageCamera ??
+              imageGallery ??
+              widget.profileImageUrl ??
+              widget.profileImageUrl ??
+              '',
           context: context,
           mounted: mounted,
         );
@@ -206,12 +209,16 @@ class _MomoUserInfoPageState extends ConsumerState<MomoUserInfoPage> {
                         ? Colors.transparent
                         : context.theme.greyColor!.withOpacity(0.4),
                   ),
-                  image: imageCamera != null || imageGallery != null
+                  image: imageCamera != null ||
+                          imageGallery != null ||
+                          widget.profileImageUrl != null
                       ? DecorationImage(
                           fit: BoxFit.cover,
                           image: imageGallery != null
-                              ? MemoryImage(imageGallery!) as ImageProvider
-                              : FileImage(imageCamera!),
+                              ? MemoryImage(imageGallery!)
+                              : widget.profileImageUrl != null
+                                  ? NetworkImage(widget.profileImageUrl!)
+                                  : FileImage(imageCamera!) as ImageProvider,
                         )
                       : null,
                 ),
@@ -220,7 +227,9 @@ class _MomoUserInfoPageState extends ConsumerState<MomoUserInfoPage> {
                   child: Icon(
                     Icons.add_a_photo_rounded,
                     size: 48,
-                    color: imageCamera == null && imageGallery == null
+                    color: imageCamera == null &&
+                            imageGallery == null &&
+                            widget.profileImageUrl == null
                         ? context.theme.photoIconColor
                         : Colors.transparent,
                   ),
