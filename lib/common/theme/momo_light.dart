@@ -24,7 +24,8 @@ ThemeData lightTheme() {
       MomoThemeExtension.lightMode,
     ],
     appBarTheme: const AppBarTheme(
-        titleTextStyle: TextStyle(fontSize: 18),
+        backgroundColor: MomoColors.mainBlueLight,
+        titleTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.dark,
@@ -38,12 +39,23 @@ ThemeData lightTheme() {
       shadowColor: Colors.transparent,
     )),
     bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: MomoColors.backLight,
-        modalBackgroundColor: MomoColors.backLight,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
+      backgroundColor: MomoColors.backLight,
+      modalBackgroundColor: MomoColors.backLight,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
-        ))),
+        ),
+      ),
+    ),
+    tabBarTheme: const TabBarTheme(
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(color: Colors.white, width: 2),
+        ),
+        unselectedLabelColor: Color.fromARGB(255, 179, 214, 217),
+        labelColor: Colors.white),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: MomoColors.mainBlueDark,
+        foregroundColor: Colors.white),
     dialogBackgroundColor: MomoColors.backLight,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

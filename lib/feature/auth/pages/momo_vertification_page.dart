@@ -31,7 +31,7 @@ class MomoVerificationPage extends ConsumerWidget {
           style: TextStyle(color: context.theme.authAppbarTextColor),
         ),
         centerTitle: true,
-        actions: [MomoIconButton(onPreesed: () {}, icon: Icons.more_vert)],
+        actions: [MomoIconButton(onPressed: () {}, icon: Icons.more_vert)],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -81,41 +81,41 @@ class MomoVerificationPage extends ConsumerWidget {
             const SizedBox(
               height: 30,
             ),
-            Row(
-              children: [
-                Icon(
-                  Icons.message,
-                  color: context.theme.greyColor,
-                ),
-                const SizedBox(width: 20),
-                Text(
-                  'SMS 문의',
-                  style: TextStyle(color: context.theme.greyColor),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Divider(
-              color: context.theme.blueColor!.withOpacity(0.2),
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.call,
-                  color: context.theme.greyColor,
-                ),
-                const SizedBox(width: 20),
-                Text(
-                  '유선 문의',
-                  style: TextStyle(color: context.theme.greyColor),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // Row(
+            //   children: [
+            //     Icon(
+            //       Icons.message,
+            //       color: context.theme.greyColor,
+            //     ),
+            //     const SizedBox(width: 20),
+            //     Text(
+            //       'SMS 문의',
+            //       style: TextStyle(color: context.theme.greyColor),
+            //     ),
+            //   ],
+            // ),
+            // const SizedBox(
+            //   height: 5,
+            // ),
+            // Divider(
+            //   color: context.theme.blueColor!.withOpacity(0.2),
+            // ),
+            // Row(
+            //   children: [
+            //     Icon(
+            //       Icons.call,
+            //       color: context.theme.greyColor,
+            //     ),
+            //     const SizedBox(width: 20),
+            //     Text(
+            //       '유선 문의',
+            //       style: TextStyle(color: context.theme.greyColor),
+            //     ),
+            //   ],
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
           ],
         ),
       ),

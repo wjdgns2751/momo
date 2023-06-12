@@ -24,7 +24,11 @@ ThemeData darkTheme() {
       MomoThemeExtension.darkMode,
     ],
     appBarTheme: const AppBarTheme(
-        titleTextStyle: TextStyle(fontSize: 18),
+        backgroundColor: MomoColors.backGrey,
+        titleTextStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: MomoColors.subGreyDark),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
@@ -45,6 +49,15 @@ ThemeData darkTheme() {
         top: Radius.circular(20),
       )),
     ),
+    tabBarTheme: const TabBarTheme(
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(color: MomoColors.mainBlueDark, width: 2),
+        ),
+        unselectedLabelColor: MomoColors.subGreyDark,
+        labelColor: MomoColors.mainBlueDark),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: MomoColors.mainBlueDark,
+        foregroundColor: Colors.white),
     dialogBackgroundColor: MomoColors.backGrey,
     dialogTheme: DialogTheme(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

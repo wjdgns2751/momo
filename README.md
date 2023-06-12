@@ -10,4 +10,4 @@
  * Image_Picker 와 Photo_manger를 활용하여 갤러리 및 카메라 촬영 이미지 가져오도록 구현 (2023-06-09)
  * Firebase Storage 와 FireStore Database 생성 후 이미지와 개인정보가 저장되는 로직 구현 (2023-06-10)
  * Firebase Storage 와 FireStore Database 에서 저장된 데이터를 가져오는 로직 구현 (2023-06-12)
- 
+ * 회원등록 이후 메인 페이지 3개의 기초 UI 작업 (2023-06-12)

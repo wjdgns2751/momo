@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:momo/common/models/momo_user_model.dart';
 import 'package:momo/common/routes/routes.dart';
 import 'package:momo/common/theme/momo_dark.dart';
 import 'package:momo/common/theme/momo_light.dart';
@@ -35,14 +34,13 @@ class MyApp extends ConsumerWidget {
       home: user.when(
         data: (user) {
           FlutterNativeSplash.remove();
-          // if (user == null) return const WelcomePage();
-          // return const MomoHomePage();
-          return const WelcomePage();
+          if (user == null) return const WelcomePage();
+          return const MomoHomePage();
         },
         error: (error, trace) {
           return const Scaffold(
             body: Center(
-              child: Text('Something wrong happened'),
+              child: Text('에러발생'),
             ),
           );
         },

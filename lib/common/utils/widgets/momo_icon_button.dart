@@ -4,7 +4,7 @@ import 'package:momo/common/theme/extension/momo_theme_extension.dart';
 class MomoIconButton extends StatelessWidget {
   const MomoIconButton({
     super.key,
-    required this.onPreesed,
+    required this.onPressed,
     required this.icon,
     this.iconColor,
     this.iconSize,
@@ -13,7 +13,7 @@ class MomoIconButton extends StatelessWidget {
     this.border,
   });
 
-  final VoidCallback onPreesed;
+  final VoidCallback onPressed;
   final IconData icon;
   final Color? iconColor;
   final double? iconSize;
@@ -27,7 +27,7 @@ class MomoIconButton extends StatelessWidget {
       decoration:
           BoxDecoration(color: bgColor, border: border, shape: BoxShape.circle),
       child: IconButton(
-          onPressed: onPreesed,
+          onPressed: onPressed,
           splashColor: Colors.transparent,
           splashRadius: (minWidth ?? 45) - 25,
           padding: EdgeInsets.zero,

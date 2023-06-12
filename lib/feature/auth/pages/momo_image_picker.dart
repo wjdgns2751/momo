@@ -94,7 +94,7 @@ class _MomoImagePickerPageState extends State<MomoImagePickerPage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         //elevation: 0,
         leading: MomoIconButton(
-          onPreesed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context),
           icon: Icons.arrow_back,
         ),
         title: Text(
@@ -102,7 +102,7 @@ class _MomoImagePickerPageState extends State<MomoImagePickerPage> {
           style: TextStyle(color: context.theme.authAppbarTextColor),
         ),
         actions: [
-          MomoIconButton(onPreesed: () {}, icon: Icons.more_vert),
+          MomoIconButton(onPressed: () {}, icon: Icons.more_vert),
         ],
       ),
       body: Padding(

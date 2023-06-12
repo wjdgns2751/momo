@@ -69,7 +69,7 @@ class _MomoUserInfoPageState extends ConsumerState<MomoUserInfoPage> {
                 ),
                 const Spacer(),
                 MomoIconButton(
-                  onPreesed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context),
                   icon: Icons.close,
                 ),
                 const SizedBox(
@@ -143,7 +143,7 @@ class _MomoUserInfoPageState extends ConsumerState<MomoUserInfoPage> {
     return Column(
       children: [
         MomoIconButton(
-          onPreesed: onTap,
+          onPressed: onTap,
           icon: icon,
           iconColor: MomoColors.mainBlueDark,
           minWidth: 50,
